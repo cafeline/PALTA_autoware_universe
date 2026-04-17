@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    update_rate: 2.0
+    enabled: false
+    required_node_name: /rosbag2_recorder

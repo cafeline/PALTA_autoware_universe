@@ -1,0 +1,11 @@
+<launch>
+  <arg name="config_file" default="$(find-pkg-share autoware_rosbag_node_monitor)/config/rosbag_node_monitor.param.yaml"/>
+  <arg name="enabled" default="false"/>
+  <arg name="required_node_name" default="/rosbag2_recorder"/>
+
+  <node pkg="autoware_rosbag_node_monitor" exec="autoware_rosbag_node_monitor_node" name="rosbag_node_monitor" output="screen">
+    <param from="$(var config_file)"/>
+    <param name="enabled" value="$(var enabled)"/>
+    <param name="required_node_name" value="$(var required_node_name)"/>
+  </node>
+</launch>
