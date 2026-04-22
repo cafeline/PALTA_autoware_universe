@@ -5,6 +5,10 @@
   <arg name="real" default="true"/>
   <arg name="use_object_recognition" default="true"/>
   <arg name="use_base_link_z" default="true"/>
+  <arg
+    name="output/points_raw"
+    default="/perception/obstacle_segmentation/pointcloud"
+  />
   <arg name="dummy_perception_publisher_config_file" default="$(find-pkg-share autoware_dummy_perception_publisher)/config/dummy_perception_publisher.param.yaml"/>
 
   <group>
@@ -13,7 +17,7 @@
       <node pkg="autoware_dummy_perception_publisher" exec="autoware_dummy_perception_publisher_node" name="dummy_perception_publisher" output="screen">
         <remap from="output/dynamic_object" to="/perception/object_recognition/detection/labeled_clusters"/>
         <remap from="output/objects_pose" to="debug/object_pose"/>
-        <remap from="output/points_raw" to="/perception/obstacle_segmentation/pointcloud"/>
+        <remap from="output/points_raw" to="$(var output/points_raw)"/>
         <remap from="input/object" to="dummy_perception_publisher/object_info"/>
         <remap from="input/reset" to="input/reset"/>
         <remap from="input/predicted_objects" to="/perception/object_recognition/objects"/>
@@ -36,7 +40,7 @@
       <node pkg="autoware_dummy_perception_publisher" exec="autoware_dummy_perception_publisher_node" name="dummy_perception_publisher" output="screen">
         <remap from="output/dynamic_object" to="/perception/object_recognition/detection/objects_with_feature"/>
         <remap from="output/objects_pose" to="debug/object_pose"/>
-        <remap from="output/points_raw" to="/perception/obstacle_segmentation/pointcloud"/>
+        <remap from="output/points_raw" to="$(var output/points_raw)"/>
         <remap from="input/object" to="dummy_perception_publisher/object_info"/>
         <remap from="input/reset" to="input/reset"/>
         <param from="$(var dummy_perception_publisher_config_file)"/>
