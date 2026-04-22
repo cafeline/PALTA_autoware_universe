@@ -92,7 +92,8 @@ DummyPerceptionPublisherNode::DummyPerceptionPublisherNode()
   detected_object_with_feature_pub_ =
     this->create_publisher<tier4_perception_msgs::msg::DetectedObjectsWithFeature>(
       "output/dynamic_object", qos);
-  pointcloud_pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("output/points_raw", qos);
+  pointcloud_pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(
+    "output/points_raw", rclcpp::SensorDataQoS().keep_last(1));
   object_sub_ = this->create_subscription<tier4_simulation_msgs::msg::DummyObject>(
     "input/object", 100,
     std::bind(&DummyPerceptionPublisherNode::objectCallback, this, std::placeholders::_1));
